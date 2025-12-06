@@ -1,0 +1,86 @@
+/* src/components/Header.css */
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(
+    --bg-panel
+  ); /* Usa as variáveis globais definidas no App.css */
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Área da Marca (Logo + Texto) */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand-icon {
+  color: var(--primary);
+  filter: drop-shadow(0 2px 4px rgba(67, 97, 238, 0.3));
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand h1 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin: 0;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
+}
+
+.brand .subtitle {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* Botão de Tema */
+.theme-toggle {
+  background: var(--bg-app);
+  border: 1px solid var(--border);
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-toggle:hover {
+  background-color: var(--secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary);
+}
+
+.theme-toggle:active {
+  transform: translateY(0);
+}
+
+/* Responsividade para celulares */
+@media (max-width: 600px) {
+  .main-header {
+    padding: 1rem;
+  }
+
+  .brand .subtitle {
+    display: none; /* Esconde o subtítulo em telas muito pequenas */
+  }
+}

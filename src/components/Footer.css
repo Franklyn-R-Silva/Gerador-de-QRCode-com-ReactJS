@@ -1,0 +1,26 @@
+.main-footer {
+  text-align: center;
+  padding: 2rem;
+  margin-top: auto; /* Empurra para o final se a tela for grande */
+  border-top: 1px solid var(--border);
+  background-color: var(--bg-panel);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.footer-links {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.footer-links a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
