@@ -7,18 +7,21 @@
 **Component**: `ExportOptions.jsx`
 
 #### Formatos Suportados:
+
 - **PNG** - Imagem padrão com alta qualidade
 - **WEBP** - Formato moderno com menor tamanho (95% de qualidade)
 - **SVG** - Vetorial (apenas para códigos de barras)
 - **PDF** - Documento pronto para impressão
 
 #### 🎯 Fundo Transparente
+
 - ✅ Opção para remover fundo
 - ✅ Mantém apenas o código (QR ou Barcode)
 - ✅ Perfeito para usar em designs
 - ✅ Funciona em PNG e WEBP
 
 **Como usar:**
+
 1. Clique no botão "Baixar"
 2. Selecione o formato desejado
 3. Marque "Fundo Transparente" se necessário
@@ -31,6 +34,7 @@
 **Component**: `HistoryPanel.jsx`
 
 #### Funcionalidades:
+
 - ✅ Salva automaticamente os últimos 20 códigos gerados
 - ✅ Armazena em `localStorage` (persistente)
 - ✅ Preview rápido das configurações
@@ -39,6 +43,7 @@
 - ✅ Limpar histórico completo
 
 #### Dados Salvos:
+
 - Tipo (QR Code ou Barcode)
 - Texto/URL
 - Cores (frente e fundo)
@@ -52,13 +57,15 @@
 ### 🎨 3. Melhorias de UI/UX
 
 #### Novas Bibliotecas Integradas:
+
 - **jsPDF** - Exportação para PDF
 - **html2canvas** - Captura melhorada de elementos
-- **react-hot-toast** *(preparado)* - Sistema de notificações aprimorado
-- **react-dropzone** *(preparado)* - Drag & drop de logos
-- **@radix-ui/react-tooltip** *(preparado)* - Tooltips acessíveis
+- **react-hot-toast** _(preparado)_ - Sistema de notificações aprimorado
+- **react-dropzone** _(preparado)_ - Drag & drop de logos
+- **@radix-ui/react-tooltip** _(preparado)_ - Tooltips acessíveis
 
 #### Melhorias Visuais:
+
 - ✅ Dropdown animado para opções de exportação
 - ✅ Badges com contador no botão de histórico
 - ✅ Modal flutuante para preview do histórico
@@ -135,6 +142,7 @@ Usuário pode carregar configs antigas
 ## 🎯 Funcionalidades Técnicas
 
 ### Transparência no QR Code:
+
 ```javascript
 // Detecta pixels da cor de fundo
 // Torna-os transparentes (alpha = 0)
@@ -142,6 +150,7 @@ Usuário pode carregar configs antigas
 ```
 
 ### Transparência no Barcode:
+
 ```javascript
 // SVG não preenche fundo se transparente
 // Canvas gerado sem fillRect
@@ -149,6 +158,7 @@ Usuário pode carregar configs antigas
 ```
 
 ### PDF Generation:
+
 ```javascript
 // Usa jsPDF
 // Orientação automática (landscape/portrait)
@@ -160,14 +170,14 @@ Usuário pode carregar configs antigas
 
 ## 📊 Comparação: Antes vs Depois
 
-| Funcionalidade | Antes | Depois |
-|----------------|-------|--------|
-| Formatos | PNG | PNG, WEBP, SVG, PDF |
-| Fundo transparente | ❌ | ✅ |
-| Histórico | ❌ | ✅ (20 itens) |
-| Exportação | Botão simples | Dropdown com opções |
-| Persistência | ❌ | ✅ localStorage |
-| Animações | Básicas | Avançadas |
+| Funcionalidade     | Antes         | Depois              |
+| ------------------ | ------------- | ------------------- |
+| Formatos           | PNG           | PNG, WEBP, SVG, PDF |
+| Fundo transparente | ❌            | ✅                  |
+| Histórico          | ❌            | ✅ (20 itens)       |
+| Exportação         | Botão simples | Dropdown com opções |
+| Persistência       | ❌            | ✅ localStorage     |
+| Animações          | Básicas       | Avançadas           |
 
 ---
 
@@ -238,4 +248,4 @@ Esta atualização transforma o QR Generator Pro em uma ferramenta profissional 
 ---
 
 **Desenvolvido com ❤️ por Franklyn Silva**  
-*Dezembro 2025*
+_Dezembro 2025_

@@ -15,7 +15,7 @@ const Header = ({ theme, toggleTheme, children }) => {
 
       <div className="header-actions">
         {children}
-        
+
         <button
           onClick={toggleTheme}
           className="theme-toggle"
@@ -23,7 +23,9 @@ const Header = ({ theme, toggleTheme, children }) => {
             theme === "light" ? "Ativar modo escuro" : "Ativar modo claro"
           }
           title={
-            theme === "light" ? "Mudar para Modo Escuro" : "Mudar para Modo Claro"
+            theme === "light"
+              ? "Mudar para Modo Escuro"
+              : "Mudar para Modo Claro"
           }
         >
           {theme === "light" ? (

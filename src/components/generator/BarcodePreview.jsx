@@ -137,7 +137,7 @@ const BarcodePreview = ({ config, showToast }) => {
         >
           <AiOutlineCopy aria-hidden="true" /> Copiar Imagem
         </motion.button>
-        
+
         <ExportOptions
           getSVG={getSVG}
           config={config}

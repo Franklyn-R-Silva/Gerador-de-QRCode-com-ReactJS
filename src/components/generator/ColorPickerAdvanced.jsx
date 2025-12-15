@@ -4,18 +4,25 @@ import { HexColorPicker } from "react-colorful";
 import { AiOutlineBgColors, AiOutlineClose } from "react-icons/ai";
 import "./ColorPickerAdvanced.css";
 
-const ColorPickerAdvanced = ({ 
-  label, 
-  color, 
-  onChange, 
-  presets = [] 
-}) => {
+const ColorPickerAdvanced = ({ label, color, onChange, presets = [] }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const defaultPresets = [
-    "#000000", "#ffffff", "#ff0000", "#00ff00", "#0000ff",
-    "#ffff00", "#ff00ff", "#00ffff", "#ff6b6b", "#4ecdc4",
-    "#45b7d1", "#96ceb4", "#ffeaa7", "#dfe6e9", "#a29bfe"
+    "#000000",
+    "#ffffff",
+    "#ff0000",
+    "#00ff00",
+    "#0000ff",
+    "#ffff00",
+    "#ff00ff",
+    "#00ffff",
+    "#ff6b6b",
+    "#4ecdc4",
+    "#45b7d1",
+    "#96ceb4",
+    "#ffeaa7",
+    "#dfe6e9",
+    "#a29bfe",
   ];
 
   const colorPresets = presets.length > 0 ? presets : defaultPresets;
@@ -23,7 +30,7 @@ const ColorPickerAdvanced = ({
   return (
     <div className="color-picker-advanced">
       <label className="color-label">{label}</label>
-      
+
       <div className="color-preview-container">
         <button
           className="color-preview-button"
@@ -37,8 +44,8 @@ const ColorPickerAdvanced = ({
 
       {isOpen && (
         <>
-          <div 
-            className="color-picker-overlay" 
+          <div
+            className="color-picker-overlay"
             onClick={() => setIsOpen(false)}
           />
           <div className="color-picker-popover">
@@ -56,7 +63,7 @@ const ColorPickerAdvanced = ({
 
             <div className="color-picker-content">
               <HexColorPicker color={color} onChange={onChange} />
-              
+
               <div className="color-input-group">
                 <input
                   type="text"

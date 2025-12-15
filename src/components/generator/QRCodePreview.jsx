@@ -92,7 +92,7 @@ const QRCodePreview = ({ config, showToast }) => {
         >
           <AiOutlineCopy aria-hidden="true" /> Copiar Imagem
         </motion.button>
-        
+
         <ExportOptions
           getCanvas={getCanvas}
           config={config}

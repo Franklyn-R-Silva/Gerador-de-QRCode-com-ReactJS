@@ -54,9 +54,7 @@ const AnimatedGenerator = ({ children, type, isVisible = true }) => {
           exit="exit"
           className="animated-generator-container"
         >
-          <motion.div variants={itemVariants}>
-            {children}
-          </motion.div>
+          <motion.div variants={itemVariants}>{children}</motion.div>
         </motion.div>
       )}
     </AnimatePresence>
@@ -69,9 +67,9 @@ export const AnimatedCard = ({ children, delay = 0 }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay }}
-      whileHover={{ 
-        y: -5, 
-        boxShadow: "0 10px 30px rgba(0,0,0,0.15)" 
+      whileHover={{
+        y: -5,
+        boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
       }}
       className="animated-card"
     >
@@ -80,7 +78,12 @@ export const AnimatedCard = ({ children, delay = 0 }) => {
   );
 };
 
-export const AnimatedButton = ({ children, onClick, variant = "primary", ...props }) => {
+export const AnimatedButton = ({
+  children,
+  onClick,
+  variant = "primary",
+  ...props
+}) => {
   return (
     <motion.button
       whileHover={{ scale: 1.05 }}
@@ -101,7 +104,13 @@ export const AnimatedButton = ({ children, onClick, variant = "primary", ...prop
   );
 };
 
-export const AnimatedInput = ({ label, value, onChange, type = "text", ...props }) => {
+export const AnimatedInput = ({
+  label,
+  value,
+  onChange,
+  type = "text",
+  ...props
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
@@ -136,14 +145,14 @@ export const AnimatedPreview = ({ children, isLoading = false }) => {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ 
-        opacity: 1, 
+      animate={{
+        opacity: 1,
         scale: 1,
-        rotateY: isLoading ? 360 : 0 
+        rotateY: isLoading ? 360 : 0,
       }}
-      transition={{ 
+      transition={{
         duration: 0.6,
-        ease: "easeOut"
+        ease: "easeOut",
       }}
       className="animated-preview"
     >
@@ -158,10 +167,10 @@ export const AnimatedPreview = ({ children, isLoading = false }) => {
           >
             <motion.div
               animate={{ rotate: 360 }}
-              transition={{ 
-                duration: 1, 
-                repeat: Infinity, 
-                ease: "linear" 
+              transition={{
+                duration: 1,
+                repeat: Infinity,
+                ease: "linear",
               }}
               className="loading-spinner"
             />
@@ -237,10 +246,10 @@ export const AnimatedList = ({ items, renderItem }) => {
               hidden: { opacity: 0, x: -20 },
               visible: { opacity: 1, x: 0 },
             }}
-            exit={{ 
-              opacity: 0, 
+            exit={{
+              opacity: 0,
               x: 20,
-              transition: { duration: 0.2 } 
+              transition: { duration: 0.2 },
             }}
             layout
             className="animated-list-item"

@@ -68,7 +68,7 @@ function App() {
           window.addToHistory(config);
         }
       }, 2000); // Salva após 2 segundos de inatividade
-      
+
       return () => clearTimeout(timer);
     }
   }, [config.text, config.generatorType]);
@@ -117,7 +117,7 @@ function App() {
 
       {/* Cabeçalho */}
       <Header theme={theme} toggleTheme={toggleTheme}>
-        <HistoryPanel 
+        <HistoryPanel
           onLoadConfig={loadConfigFromHistory}
           showToast={showToast}
         />

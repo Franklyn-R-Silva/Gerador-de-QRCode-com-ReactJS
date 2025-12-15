@@ -1,11 +1,11 @@
 // src/components/generator/HistoryPanel.jsx
 import React, { useState, useEffect } from "react";
-import { 
-  AiOutlineHistory, 
-  AiOutlineDelete, 
+import {
+  AiOutlineHistory,
+  AiOutlineDelete,
   AiOutlineEye,
   AiOutlineClose,
-  AiOutlineClear
+  AiOutlineClear,
 } from "react-icons/ai";
 import "./HistoryPanel.css";
 
@@ -36,7 +36,8 @@ const HistoryPanel = ({ onLoadConfig, showToast }) => {
         id: Date.now(),
         timestamp: new Date().toISOString(),
         config: { ...config },
-        preview: config.text.substring(0, 50) + (config.text.length > 50 ? "..." : "")
+        preview:
+          config.text.substring(0, 50) + (config.text.length > 50 ? "..." : ""),
       };
 
       const updatedHistory = [newItem, ...history].slice(0, 20); // Manter apenas 20
@@ -48,7 +49,7 @@ const HistoryPanel = ({ onLoadConfig, showToast }) => {
   };
 
   const deleteItem = (id) => {
-    const updated = history.filter(item => item.id !== id);
+    const updated = history.filter((item) => item.id !== id);
     setHistory(updated);
     localStorage.setItem("qrcode_history", JSON.stringify(updated));
     showToast?.("🗑️ Item removido do histórico");
@@ -74,7 +75,7 @@ const HistoryPanel = ({ onLoadConfig, showToast }) => {
       day: "2-digit",
       month: "short",
       hour: "2-digit",
-      minute: "2-digit"
+      minute: "2-digit",
     }).format(date);
   };
 
@@ -86,7 +87,9 @@ const HistoryPanel = ({ onLoadConfig, showToast }) => {
           id: Date.now(),
           timestamp: new Date().toISOString(),
           config: { ...config },
-          preview: config.text.substring(0, 50) + (config.text.length > 50 ? "..." : "")
+          preview:
+            config.text.substring(0, 50) +
+            (config.text.length > 50 ? "..." : ""),
         };
 
         const updatedHistory = [newItem, ...history].slice(0, 20);
@@ -96,7 +99,7 @@ const HistoryPanel = ({ onLoadConfig, showToast }) => {
         console.error("Erro ao salvar histórico:", err);
       }
     };
-    
+
     window.addToHistory = saveFunc;
     return () => {
       delete window.addToHistory;
@@ -155,10 +158,14 @@ const HistoryPanel = ({ onLoadConfig, showToast }) => {
                     <div key={item.id} className="history-item">
                       <div className="history-item-content">
                         <div className="history-item-type">
-                          {item.config.generatorType === "qrcode" ? "🔲 QR Code" : "📊 Barcode"}
+                          {item.config.generatorType === "qrcode"
+                            ? "🔲 QR Code"
+                            : "📊 Barcode"}
                         </div>
                         <div className="history-item-text">{item.preview}</div>
-                        <div className="history-item-date">{formatDate(item.timestamp)}</div>
+                        <div className="history-item-date">
+                          {formatDate(item.timestamp)}
+                        </div>
                       </div>
                       <div className="history-item-actions">
                         <button
@@ -193,7 +200,10 @@ const HistoryPanel = ({ onLoadConfig, showToast }) => {
       )}
 
       {previewItem && (
-        <div className="preview-modal-overlay" onClick={() => setPreviewItem(null)}>
+        <div
+          className="preview-modal-overlay"
+          onClick={() => setPreviewItem(null)}
+        >
           <div className="preview-modal" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={() => setPreviewItem(null)}
@@ -204,10 +214,31 @@ const HistoryPanel = ({ onLoadConfig, showToast }) => {
             </button>
             <h4>Preview do Histórico</h4>
             <div className="preview-details">
-              <p><strong>Tipo:</strong> {previewItem.config.generatorType === "qrcode" ? "QR Code" : "Código de Barras"}</p>
-              <p><strong>Conteúdo:</strong> {previewItem.config.text}</p>
-              <p><strong>Cor:</strong> <span className="color-preview" style={{ backgroundColor: previewItem.config.fgColor }}></span> {previewItem.config.fgColor}</p>
-              <p><strong>Fundo:</strong> <span className="color-preview" style={{ backgroundColor: previewItem.config.bgColor }}></span> {previewItem.config.bgColor}</p>
+              <p>
+                <strong>Tipo:</strong>{" "}
+                {previewItem.config.generatorType === "qrcode"
+                  ? "QR Code"
+                  : "Código de Barras"}
+              </p>
+              <p>
+                <strong>Conteúdo:</strong> {previewItem.config.text}
+              </p>
+              <p>
+                <strong>Cor:</strong>{" "}
+                <span
+                  className="color-preview"
+                  style={{ backgroundColor: previewItem.config.fgColor }}
+                ></span>{" "}
+                {previewItem.config.fgColor}
+              </p>
+              <p>
+                <strong>Fundo:</strong>{" "}
+                <span
+                  className="color-preview"
+                  style={{ backgroundColor: previewItem.config.bgColor }}
+                ></span>{" "}
+                {previewItem.config.bgColor}
+              </p>
             </div>
             <button
               onClick={() => {
