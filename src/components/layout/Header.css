@@ -70,6 +70,13 @@
   margin-top: 2px;
 }
 
+/* Ações do Header */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 /* Botão de Tema */
 .theme-toggle {
   background: var(--bg-app);

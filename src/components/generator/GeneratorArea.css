@@ -128,6 +128,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  align-items: stretch;
+}
+
+/* Botão de copiar ocupa 1 coluna, Export Options ocupa 1 coluna */
+.action-buttons-grid > * {
+  min-height: 56px;
 }
 
 /* Estilos dos Botões */

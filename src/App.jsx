@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 // Importando os componentes modulares
@@ -8,6 +8,7 @@ import Toast from "./components/common/Toast";
 import QRCodePreview from "./components/generator/QRCodePreview";
 import BarcodePreview from "./components/generator/BarcodePreview";
 import Controls from "./components/generator/Controls";
+import HistoryPanel from "./components/generator/HistoryPanel";
 import { GENERATOR_TYPES } from "./constants/generatorTypes";
 import { BARCODE_FORMATS } from "./constants/barcodeTypes";
 
@@ -54,6 +55,24 @@ function App() {
     setConfig((prev) => ({ ...prev, [field]: value }));
   };
 
+  // Carregar configuração do histórico
+  const loadConfigFromHistory = (historyConfig) => {
+    setConfig(historyConfig);
+  };
+
+  // Salvar no histórico quando texto mudar
+  useEffect(() => {
+    if (config.text && config.text.length > 0) {
+      const timer = setTimeout(() => {
+        if (window.addToHistory) {
+          window.addToHistory(config);
+        }
+      }, 2000); // Salva após 2 segundos de inatividade
+      
+      return () => clearTimeout(timer);
+    }
+  }, [config.text, config.generatorType]);
+
   // Alternar tema
   const toggleTheme = () =>
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
@@ -97,7 +116,12 @@ function App() {
       )}
 
       {/* Cabeçalho */}
-      <Header theme={theme} toggleTheme={toggleTheme} />
+      <Header theme={theme} toggleTheme={toggleTheme}>
+        <HistoryPanel 
+          onLoadConfig={loadConfigFromHistory}
+          showToast={showToast}
+        />
+      </Header>
 
       <main className="main-content">
         {/* Esquerda: Visualização do Código */}

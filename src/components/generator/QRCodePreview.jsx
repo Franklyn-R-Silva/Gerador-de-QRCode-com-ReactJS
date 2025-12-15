@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
 import { QRCode } from "react-qrcode-logo";
-import { AiOutlineCopy, AiOutlineDownload } from "react-icons/ai";
+import { AiOutlineCopy } from "react-icons/ai";
+import { motion } from "framer-motion";
+import ExportOptions from "./ExportOptions";
 import "./GeneratorArea.css";
 
 const QRCodePreview = ({ config, showToast }) => {
@@ -17,27 +19,8 @@ const QRCodePreview = ({ config, showToast }) => {
   };
 
   /**
-   * Lógica de Download
+   * Lógica de Download - Removida (agora usa ExportOptions)
    */
-  const handleDownload = () => {
-    const canvas = getCanvas();
-    if (!canvas) {
-      showToast && showToast("Erro: Canvas não encontrado!");
-      return;
-    }
-
-    try {
-      const dataUrl = canvas.toDataURL("image/png");
-      const link = document.createElement("a");
-      link.download = `qrcode-${Date.now()}.png`;
-      link.href = dataUrl;
-      link.click();
-      if (showToast) showToast("Download iniciado!");
-    } catch (err) {
-      console.error(err);
-      if (showToast) showToast("Erro ao baixar QR Code.");
-    }
-  };
 
   /**
    * Lógica de Copiar para a Área de Transferência
@@ -59,15 +42,22 @@ const QRCodePreview = ({ config, showToast }) => {
   };
 
   return (
-    <section
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
       className="preview-section"
       aria-label="Pré-visualização do código"
     >
-      <div
+      <motion.div
+        initial={{ scale: 0.9 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.4, delay: 0.1 }}
         className="preview-card"
         ref={qrRef}
         role="img"
         aria-label="QR Code gerado"
+        whileHover={{ scale: 1.02 }}
       >
         <QRCode
           value={config.text || "https://seusite.com"}
@@ -83,29 +73,34 @@ const QRCodePreview = ({ config, showToast }) => {
           removeQrCodeBehindLogo={config.removeQrCodeBehindLogo}
           eyeRadius={eyeRadius}
         />
-      </div>
+      </motion.div>
 
-      <div
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
         className="action-buttons-grid"
         role="group"
         aria-label="Ações do QR Code"
       >
-        <button
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={handleCopyQRCode}
           className="btn btn-secondary"
           aria-label="Copiar QR Code para área de transferência"
         >
           <AiOutlineCopy aria-hidden="true" /> Copiar Imagem
-        </button>
-        <button
-          onClick={handleDownload}
-          className="btn btn-primary"
-          aria-label="Baixar QR Code como PNG"
-        >
-          <AiOutlineDownload aria-hidden="true" /> Baixar PNG
-        </button>
-      </div>
-    </section>
+        </motion.button>
+        
+        <ExportOptions
+          getCanvas={getCanvas}
+          config={config}
+          isBarcode={false}
+          showToast={showToast}
+        />
+      </motion.div>
+    </motion.section>
   );
 };
 

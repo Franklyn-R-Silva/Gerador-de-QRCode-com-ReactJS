@@ -15,6 +15,7 @@ import {
   BARCODE_CATEGORIES,
   BARCODE_EXAMPLES,
 } from "../../constants/barcodeTypes";
+import ColorPickerAdvanced from "./ColorPickerAdvanced";
 import "./Controls.css";
 
 const Controls = ({
@@ -351,25 +352,17 @@ const Controls = ({
         <div className="group-header">
           <AiOutlineBgColors /> <span>Cores</span>
         </div>
-        <div className="color-pickers">
-          <div className="color-item">
-            <input
-              type="color"
-              value={config.fgColor}
-              onChange={(e) => updateConfig("fgColor", e.target.value)}
-              title="Cor do QR Code"
-            />
-            <label>Frente</label>
-          </div>
-          <div className="color-item">
-            <input
-              type="color"
-              value={config.bgColor}
-              onChange={(e) => updateConfig("bgColor", e.target.value)}
-              title="Cor de Fundo"
-            />
-            <label>Fundo</label>
-          </div>
+        <div className="color-pickers-advanced">
+          <ColorPickerAdvanced
+            label="Cor da Frente"
+            color={config.fgColor}
+            onChange={(color) => updateConfig("fgColor", color)}
+          />
+          <ColorPickerAdvanced
+            label="Cor de Fundo"
+            color={config.bgColor}
+            onChange={(color) => updateConfig("bgColor", color)}
+          />
         </div>
       </div>
 

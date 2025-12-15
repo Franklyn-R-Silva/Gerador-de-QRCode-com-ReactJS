@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import Barcode from "react-barcode";
-import { AiOutlineCopy, AiOutlineDownload } from "react-icons/ai";
+import { AiOutlineCopy } from "react-icons/ai";
+import { motion } from "framer-motion";
+import ExportOptions from "./ExportOptions";
 import "./GeneratorArea.css";
 
 const BarcodePreview = ({ config, showToast }) => {
@@ -39,28 +41,8 @@ const BarcodePreview = ({ config, showToast }) => {
   };
 
   /**
-   * Lógica de Download
+   * Lógica de Download - Removida (agora usa ExportOptions)
    */
-  const handleDownload = async () => {
-    const svg = getSVG();
-    if (!svg) {
-      showToast && showToast("Erro: Código de barras não encontrado!");
-      return;
-    }
-
-    try {
-      const canvas = await svgToCanvas(svg);
-      const dataUrl = canvas.toDataURL("image/png");
-      const link = document.createElement("a");
-      link.download = `barcode-${Date.now()}.png`;
-      link.href = dataUrl;
-      link.click();
-      if (showToast) showToast("Download iniciado!");
-    } catch (err) {
-      console.error(err);
-      if (showToast) showToast("Erro ao baixar código de barras.");
-    }
-  };
 
   /**
    * Lógica de Copiar para a Área de Transferência
@@ -88,21 +70,33 @@ const BarcodePreview = ({ config, showToast }) => {
   }, [config.text, config.barcodeFormat]);
 
   return (
-    <section
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
       className="preview-section"
       aria-label="Pré-visualização do código de barras"
     >
-      <div
+      <motion.div
+        initial={{ scale: 0.9 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.4, delay: 0.1 }}
         className="preview-card barcode-card"
         ref={barcodeRef}
         role="img"
         aria-label="Código de barras gerado"
+        whileHover={{ scale: 1.02 }}
       >
         {error ? (
-          <div className="error-message" role="alert">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="error-message"
+            role="alert"
+          >
             <p>❌ Erro ao gerar código de barras</p>
             <small>{error}</small>
-          </div>
+          </motion.div>
         ) : (
           <Barcode
             value={config.text || "123456789"}
@@ -123,31 +117,35 @@ const BarcodePreview = ({ config, showToast }) => {
             }}
           />
         )}
-      </div>
+      </motion.div>
 
-      <div
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
         className="action-buttons-grid"
         role="group"
         aria-label="Ações do código de barras"
       >
-        <button
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={handleCopyBarcode}
           className="btn btn-secondary"
           disabled={!!error}
           aria-label="Copiar código de barras para área de transferência"
         >
           <AiOutlineCopy aria-hidden="true" /> Copiar Imagem
-        </button>
-        <button
-          onClick={handleDownload}
-          className="btn btn-primary"
-          disabled={!!error}
-          aria-label="Baixar código de barras como PNG"
-        >
-          <AiOutlineDownload aria-hidden="true" /> Baixar PNG
-        </button>
-      </div>
-    </section>
+        </motion.button>
+        
+        <ExportOptions
+          getSVG={getSVG}
+          config={config}
+          isBarcode={true}
+          showToast={showToast}
+        />
+      </motion.div>
+    </motion.section>
   );
 };
 
