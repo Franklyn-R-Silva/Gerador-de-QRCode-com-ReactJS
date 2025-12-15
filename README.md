@@ -11,6 +11,7 @@ Aplicação React moderna e profissional para geração de **QR Codes** e **Cód
 ## ✨ Funcionalidades Principais
 
 ### 📱 QR Codes
+
 - 🎨 Personalização completa de cores (frente e fundo)
 - 🔲 Estilos de módulos (Quadrados ou Pontos)
 - 👁️ Estilos de olhos (Quadrados ou Redondos)
@@ -19,24 +20,31 @@ Aplicação React moderna e profissional para geração de **QR Codes** e **Cód
 - 🎨 Templates prontos (Padrão, WhatsApp, Dark, Azul Tech)
 
 ### 📊 Códigos de Barras (NOVO!)
+
 Suporte para mais de **25 formatos**:
 
 #### Code Family
+
 Code 39 • Code 93 • Code 128 (Auto, A, B, C)
 
 #### GS1 & ITF
+
 GS1-128 • ITF • ITF-14
 
 #### EAN & ISBN
+
 EAN-13 • EAN-8 • EAN-5 • EAN-2 • ISBN
 
 #### UPC
+
 UPC-A • UPC-E
 
 #### Outros
+
 MSI (10, 11, 1010, 1110) • Pharmacode • Codabar
 
 ### 🎯 Recursos Gerais
+
 - 📥 Download em formato PNG de alta qualidade
 - 📋 Copiar para área de transferência
 - 🌓 Modo Claro/Escuro
@@ -69,12 +77,14 @@ O aplicativo estará disponível em `http://localhost:3000`
 ### Uso Básico
 
 #### Gerando um QR Code
+
 1. Por padrão, o modo **QR Code** já está selecionado
 2. Digite seu texto, URL ou dados no campo "Conteúdo"
 3. Personalize cores, estilo e adicione logo (opcional)
 4. Clique em "Baixar PNG" ou "Copiar Imagem"
 
 #### Gerando um Código de Barras
+
 1. Clique no botão **"Código de Barras"** no topo
 2. Escolha o formato desejado (ex: EAN-13, Code 128)
 3. Um valor de exemplo será preenchido automaticamente
@@ -162,6 +172,7 @@ Este projeto está sob a licença MIT.
 ## ⭐ Apoie o Projeto
 
 Se este projeto foi útil para você, considere:
+
 - ⭐ Dar uma estrela no GitHub
 - 🐛 Reportar bugs e sugerir melhorias
 - 📢 Compartilhar com outros desenvolvedores
