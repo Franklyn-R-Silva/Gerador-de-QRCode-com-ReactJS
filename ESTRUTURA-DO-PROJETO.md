@@ -53,27 +53,32 @@ Gerador-de-QRCode-com-ReactJS/
 ## 📊 Organização por Responsabilidade
 
 ### 🎨 Layout (`components/layout/`)
+
 **Propósito**: Componentes estruturais que aparecem em todas as páginas
 
 - **Header**: Branding + alternador de tema
 - **Footer**: Informações do desenvolvedor + links sociais
 
 **Por que separar?**
+
 - Facilita manutenção
 - Reutilizável em múltiplas páginas
 - Mudanças isoladas não afetam outros componentes
 
 ### 🔧 Common (`components/common/`)
+
 **Propósito**: Componentes genéricos reutilizáveis
 
 - **Toast**: Sistema de notificações
 
 **Por que separar?**
+
 - Pode ser usado em qualquer parte da aplicação
 - Facilita criar biblioteca de componentes
 - Mantém código DRY (Don't Repeat Yourself)
 
 ### 🎯 Generator (`components/generator/`)
+
 **Propósito**: Lógica específica de geração de códigos
 
 - **QRCodePreview**: Renderiza e exporta QR Codes
@@ -81,27 +86,32 @@ Gerador-de-QRCode-com-ReactJS/
 - **Controls**: Painel de configuração unificado
 
 **Por que separar?**
+
 - Agrupa funcionalidades relacionadas
 - Facilita adição de novos tipos
 - Mantém lógica de negócio isolada
 
 ### 📦 Constants (`constants/`)
+
 **Propósito**: Valores fixos e configurações
 
 - **generatorTypes**: Define tipos disponíveis
 - **barcodeTypes**: Lista todos os formatos + exemplos
 
 **Por que separar?**
+
 - Single Source of Truth
 - Facilita mudanças em um único lugar
 - Previne typos e inconsistências
 
 ### 🪝 Hooks (`hooks/`)
+
 **Propósito**: Lógica reutilizável com estado React
 
 - **useGenerator**: Download, cópia, conversão SVG→Canvas
 
 **Por que separar?**
+
 - Reutilização de lógica
 - Testes mais fáceis
 - Separação de concerns
@@ -139,6 +149,7 @@ Gerador-de-QRCode-com-ReactJS/
 ## 📝 Padrões Aplicados
 
 ### 1. **Atomic Design**
+
 ```
 Átomos    → Toast, Botões
 Moléculas → Controls, Headers
@@ -147,17 +158,21 @@ Templates → App.jsx
 ```
 
 ### 2. **Single Responsibility Principle (SRP)**
+
 Cada componente tem UMA responsabilidade clara:
+
 - Header: Apenas UI do topo
 - QRCodePreview: Apenas renderizar QR
 - Controls: Apenas inputs de configuração
 
 ### 3. **Don't Repeat Yourself (DRY)**
+
 - Constantes centralizadas
 - Hook compartilhado
 - Estilos em variáveis CSS
 
 ### 4. **Separation of Concerns**
+
 - UI (componentes)
 - Lógica (hooks)
 - Dados (constants)
@@ -166,16 +181,19 @@ Cada componente tem UMA responsabilidade clara:
 ## 🎯 Convenções de Nomenclatura
 
 ### Arquivos
+
 - **PascalCase**: Componentes React (`QRCodePreview.jsx`)
 - **camelCase**: Utilitários e hooks (`useGenerator.js`)
 - **kebab-case**: CSS (`generator-area.css`)
 - **SCREAMING_SNAKE**: Constantes (`BARCODE_FORMATS`)
 
 ### Pastas
+
 - **lowercase**: Sempre minúsculas (`components/`, `hooks/`)
 - **Descritivas**: Nome indica o conteúdo
 
 ### Variáveis
+
 - **camelCase**: Variáveis locais (`updateConfig`)
 - **PascalCase**: Componentes (`QRCodePreview`)
 - **UPPER_CASE**: Constantes exportadas (`GENERATOR_TYPES`)
@@ -183,7 +201,9 @@ Cada componente tem UMA responsabilidade clara:
 ## 🚀 Próximos Passos para Escalabilidade
 
 ### 1. Context API
+
 Para evitar prop drilling:
+
 ```
 src/
 └── contexts/
@@ -192,7 +212,9 @@ src/
 ```
 
 ### 2. Utils/Helpers
+
 Para funções auxiliares:
+
 ```
 src/
 └── utils/
@@ -202,7 +224,9 @@ src/
 ```
 
 ### 3. Services
+
 Para lógica de negócio complexa:
+
 ```
 src/
 └── services/
@@ -211,6 +235,7 @@ src/
 ```
 
 ### 4. Testes
+
 ```
 src/
 └── __tests__/
