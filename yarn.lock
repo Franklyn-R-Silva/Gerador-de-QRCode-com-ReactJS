@@ -4978,8 +4978,10 @@ gensync@^1.0.0-beta.2:
     "@testing-library/user-event" "^13.5.0"
     gerador-de-qrcode "file:"
     html-to-image "^1.11.13"
+    jsbarcode "^3.12.1"
     qrcode "^1.5.1"
     react "^18.2.0"
+    react-barcode "^1.6.1"
     react-dom "^18.2.0"
     react-icons "^4.12.0"
     react-qr-code "^2.0.7"
@@ -6386,6 +6388,11 @@ js-yaml@^4.1.0:
   integrity sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==
   dependencies:
     argparse "^2.0.1"
+
+jsbarcode@^3.12.1, jsbarcode@^3.8.0:
+  version "3.12.1"
+  resolved "https://registry.npmjs.org/jsbarcode/-/jsbarcode-3.12.1.tgz"
+  integrity sha512-QZQSqIknC2Rr/YOUyOkCBqsoiBAOTYK+7yNN3JsqfoUtJtkazxNw1dmPpxuv7VVvqW13kA3/mKiLq+s/e3o9hQ==
 
 jsdom@^16.6.0:
   version "16.7.0"
@@ -7975,7 +7982,7 @@ prompts@^2.0.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.8.1:
+prop-types@^15.6.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -8085,6 +8092,14 @@ react-app-polyfill@^3.0.0:
     raf "^3.4.1"
     regenerator-runtime "^0.13.9"
     whatwg-fetch "^3.6.2"
+
+react-barcode@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.npmjs.org/react-barcode/-/react-barcode-1.6.1.tgz"
+  integrity sha512-pc4ftnO5syHa/UjCruEeRsomlhoxKSugIgTA8T4dH0fvc89UMHL+/1Sp25IAphqG44pJkE5hMXhv89iS09jQyw==
+  dependencies:
+    jsbarcode "^3.8.0"
+    prop-types "^15.6.2"
 
 react-dev-utils@^12.0.1:
   version "12.0.1"
@@ -8225,7 +8240,7 @@ react-scripts@5.0.1:
   optionalDependencies:
     fsevents "^2.3.2"
 
-react@*, react@^18.0.0, react@^18.2.0, react@^18.3.1, "react@>= 16", react@>=18.0.0:
+react@*, react@^18.0.0, react@^18.2.0, react@^18.3.1, "react@>= 16", react@>=18.0.0, "react@16 - 19":
   version "18.3.1"
   resolved "https://registry.npmjs.org/react/-/react-18.3.1.tgz"
   integrity sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==

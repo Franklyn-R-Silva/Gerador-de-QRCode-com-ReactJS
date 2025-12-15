@@ -2,25 +2,42 @@ import { useState } from "react";
 import "./App.css";
 
 // Importando os componentes modulares
-import Header from "./components/Header";
-import QRCodeArea from "./components/QRCodeArea";
-import Controls from "./components/Controls";
-import Toast from "./components/Toast";
-import Footer from "./components/Footer";
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
+import Toast from "./components/common/Toast";
+import QRCodePreview from "./components/generator/QRCodePreview";
+import BarcodePreview from "./components/generator/BarcodePreview";
+import Controls from "./components/generator/Controls";
+import { GENERATOR_TYPES } from "./constants/generatorTypes";
+import { BARCODE_FORMATS } from "./constants/barcodeTypes";
 
 function App() {
-  // 1. Estado Unificado das Configurações do QR Code
+  // 1. Estado Unificado das Configurações
   const [config, setConfig] = useState({
+    // Tipo de Gerador
+    generatorType: GENERATOR_TYPES.QRCODE,
+
+    // Comum
     text: "",
-    size: 280, // Tamanho inicial otimizado
     fgColor: "#000000",
     bgColor: "#ffffff",
-    ecLevel: "H", // Alta correção de erro para suportar logos
+
+    // QR Code específico
+    size: 280,
+    ecLevel: "H",
     qrStyle: "squares",
     eyeStyle: "square",
     logoImage: "",
     logoOpacity: 1,
     removeQrCodeBehindLogo: false,
+
+    // Barcode específico
+    barcodeFormat: BARCODE_FORMATS.CODE128,
+    barcodeWidth: 2,
+    barcodeHeight: 100,
+    barcodeDisplayValue: true,
+    barcodeFontSize: 20,
+    barcodeMargin: 10,
   });
 
   // 2. Estados de Interface (Tema e Notificações)
@@ -83,9 +100,12 @@ function App() {
       <Header theme={theme} toggleTheme={toggleTheme} />
 
       <main className="main-content">
-        {/* Esquerda: Visualização do QR Code */}
-        {/* Nota: O QRCodeArea usa o hook useQRCode internamente para baixar/copiar */}
-        <QRCodeArea config={config} showToast={showToast} />
+        {/* Esquerda: Visualização do Código */}
+        {config.generatorType === GENERATOR_TYPES.QRCODE ? (
+          <QRCodePreview config={config} showToast={showToast} />
+        ) : (
+          <BarcodePreview config={config} showToast={showToast} />
+        )}
 
         {/* Direita: Controles de Edição */}
         <Controls

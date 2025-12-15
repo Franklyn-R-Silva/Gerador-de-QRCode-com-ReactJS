@@ -1,0 +1,135 @@
+/* src/components/generator/GeneratorArea.css */
+
+.preview-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  /* Sticky: Mantém o preview visível enquanto rola a página (apenas desktop) */
+  position: sticky;
+  top: 2rem;
+}
+
+.preview-card {
+  background: var(--bg-panel);
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--border);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 300px;
+}
+
+/* Fundo quadriculado para QR Codes (ajuda a ver transparência) */
+.preview-card:not(.barcode-card) {
+  background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-color: var(--bg-panel);
+}
+
+.preview-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Estilos específicos para Barcode */
+.barcode-card {
+  background: var(--bg-panel);
+  overflow-x: auto;
+}
+
+.barcode-card svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Mensagem de erro */
+.error-message {
+  text-align: center;
+  color: #ef4444;
+  padding: 2rem;
+}
+
+.error-message p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.error-message small {
+  color: var(--text-muted);
+  display: block;
+  margin-top: 0.5rem;
+}
+
+/* Grid para os botões */
+.action-buttons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Estilos dos Botões */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(67, 97, 238, 0.4);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--primary-hover);
+  box-shadow: 0 6px 8px -1px rgba(67, 97, 238, 0.5);
+}
+
+.btn-secondary {
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--secondary);
+  border-color: var(--primary);
+}
+
+/* Ajuste para telas pequenas */
+@media (max-width: 600px) {
+  .preview-section {
+    position: static; /* Remove o sticky em celulares */
+  }
+
+  .preview-card {
+    padding: 1.5rem;
+  }
+
+  .action-buttons-grid {
+    grid-template-columns: 1fr; /* Botões um embaixo do outro no celular */
+  }
+}

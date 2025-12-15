@@ -27,6 +27,78 @@
   padding-bottom: 0.75rem;
 }
 
+/* NOVO: Seletor de Tipo */
+.type-selector {
+  background: linear-gradient(135deg, var(--primary) 0%, #5b75f0 100%);
+  border: none;
+  color: white;
+}
+
+.type-selector .group-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.type-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.type-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.type-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.type-btn.active {
+  background: white;
+  color: var(--primary);
+  border-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* NOVO: Categoria de Barcode */
+.barcode-category {
+  margin-bottom: 1rem;
+}
+
+.category-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.barcode-format-select {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  font-size: 0.95rem;
+  outline: none;
+  cursor: pointer;
+}
+
 /* Inputs de Texto */
 .input-text {
   width: 100%;
@@ -92,11 +164,13 @@ input[type="range"] {
   background: var(--border);
   border-radius: 5px;
   outline: none;
+  appearance: none;
   -webkit-appearance: none;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
+  appearance: none;
   width: 18px;
   height: 18px;
   background: var(--primary);

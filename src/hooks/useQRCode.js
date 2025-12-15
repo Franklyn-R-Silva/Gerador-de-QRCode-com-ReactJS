@@ -1,30 +1,65 @@
 import { useCallback } from "react";
 
 /**
- * Hook personalizado para manipular ações do QR Code
- * @param {React.RefObject} qrRef - Referência para o container do QR Code
+ * Hook personalizado para manipular ações de geradores (QR Code e Barcode)
+ * @param {React.RefObject} generatorRef - Referência para o container do gerador
  * @param {Function} showToast - Função para exibir notificações
+ * @param {string} type - Tipo do gerador: 'qrcode' ou 'barcode'
  */
-const useQRCode = (qrRef, showToast) => {
-  // Função auxiliar para encontrar o canvas dentro do elemento ref
-  const getCanvas = useCallback(() => {
-    if (!qrRef.current) return null;
-    return qrRef.current.querySelector("canvas");
-  }, [qrRef]);
+const useGenerator = (generatorRef, showToast, type = "qrcode") => {
+  // Função auxiliar para encontrar o canvas/svg dentro do elemento ref
+  const getElement = useCallback(() => {
+    if (!generatorRef.current) return null;
+    if (type === "qrcode") {
+      return generatorRef.current.querySelector("canvas");
+    } else {
+      return generatorRef.current.querySelector("svg");
+    }
+  }, [generatorRef, type]);
 
-  // Ação: Baixar QR Code
-  const downloadQRCode = useCallback(() => {
-    const canvas = getCanvas();
-    if (!canvas) {
-      if (showToast) showToast("Erro: Canvas não encontrado!");
+  /**
+   * Converte SVG para Canvas (necessário para barcode)
+   */
+  const svgToCanvas = useCallback(async (svg) => {
+    return new Promise((resolve, reject) => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      const svgData = new XMLSerializer().serializeToString(svg);
+      const img = new Image();
+
+      img.onload = () => {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+        resolve(canvas);
+      };
+
+      img.onerror = reject;
+      img.src =
+        "data:image/svg+xml;base64," +
+        btoa(unescape(encodeURIComponent(svgData)));
+    });
+  }, []);
+
+  // Ação: Baixar Código
+  const downloadCode = useCallback(async () => {
+    const element = getElement();
+    if (!element) {
+      if (showToast) showToast("Erro: Elemento não encontrado!");
       return;
     }
 
     try {
-      // Cria um link temporário para forçar o download
+      let canvas;
+      if (type === "barcode") {
+        canvas = await svgToCanvas(element);
+      } else {
+        canvas = element;
+      }
+
       const dataUrl = canvas.toDataURL("image/png");
       const link = document.createElement("a");
-      link.download = `qrcode-${Date.now()}.png`; // Nome único com timestamp
+      link.download = `${type}-${Date.now()}.png`;
       link.href = dataUrl;
       document.body.appendChild(link);
       link.click();
@@ -33,35 +68,42 @@ const useQRCode = (qrRef, showToast) => {
       if (showToast) showToast("Download iniciado!");
     } catch (err) {
       console.error("Erro ao baixar:", err);
-      if (showToast) showToast("Erro ao baixar QR Code.");
+      if (showToast) showToast("Erro ao baixar.");
     }
-  }, [getCanvas, showToast]);
+  }, [getElement, showToast, type, svgToCanvas]);
 
   // Ação: Copiar para Área de Transferência
-  const copyQRCode = useCallback(async () => {
-    const canvas = getCanvas();
-    if (!canvas) return;
+  const copyCode = useCallback(async () => {
+    const element = getElement();
+    if (!element) return;
 
     try {
+      let canvas;
+      if (type === "barcode") {
+        canvas = await svgToCanvas(element);
+      } else {
+        canvas = element;
+      }
+
       const dataUrl = canvas.toDataURL("image/png");
-
-      // O Clipboard API precisa de um Blob, não de uma string Base64
       const blob = await (await fetch(dataUrl)).blob();
-
       const clipboardItem = new ClipboardItem({ "image/png": blob });
       await navigator.clipboard.write([clipboardItem]);
 
-      if (showToast) showToast("QR Code copiado para o clipboard!");
+      if (showToast) showToast("Código copiado para o clipboard!");
     } catch (err) {
       console.error("Erro ao copiar:", err);
       if (showToast) showToast("Erro ao copiar. Tente baixar.");
     }
-  }, [getCanvas, showToast]);
+  }, [getElement, showToast, type, svgToCanvas]);
 
   return {
-    downloadQRCode,
-    copyQRCode,
+    downloadCode,
+    copyCode,
+    // Aliases para compatibilidade
+    downloadQRCode: downloadCode,
+    copyQRCode: copyCode,
   };
 };
 
-export default useQRCode;
+export default useGenerator;
