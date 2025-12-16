@@ -9,6 +9,7 @@ import QRCodePreview from "./components/generator/QRCodePreview";
 import BarcodePreview from "./components/generator/BarcodePreview";
 import Controls from "./components/generator/Controls";
 import HistoryPanel from "./components/generator/HistoryPanel";
+import HistoryButton from "./components/generator/HistoryButton";
 import { GENERATOR_TYPES } from "./constants/generatorTypes";
 import { BARCODE_FORMATS } from "./constants/barcodeTypes";
 
@@ -115,12 +116,15 @@ function App() {
         <Toast message={notification} onClose={() => setNotification(null)} />
       )}
 
+      {/* Painel de Histórico (nível raiz para z-index funcionar corretamente) */}
+      <HistoryPanel
+        onLoadConfig={loadConfigFromHistory}
+        showToast={showToast}
+      />
+
       {/* Cabeçalho */}
       <Header theme={theme} toggleTheme={toggleTheme}>
-        <HistoryPanel
-          onLoadConfig={loadConfigFromHistory}
-          showToast={showToast}
-        />
+        <HistoryButton />
       </Header>
 
       <main className="main-content">

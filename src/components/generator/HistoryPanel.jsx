@@ -101,26 +101,20 @@ const HistoryPanel = ({ onLoadConfig, showToast }) => {
     };
 
     window.addToHistory = saveFunc;
+
+    // Expor função para abrir o painel
+    window.openHistoryPanel = () => setIsOpen(true);
+    window.getHistoryCount = () => history.length;
+
     return () => {
       delete window.addToHistory;
+      delete window.openHistoryPanel;
+      delete window.getHistoryCount;
     };
   }, [history]);
 
   return (
     <>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="btn-history"
-        aria-label="Ver histórico"
-        title={`Histórico (${history.length} itens)`}
-      >
-        <AiOutlineHistory size={20} />
-        <span>Histórico</span>
-        {history.length > 0 && (
-          <span className="history-badge">{history.length}</span>
-        )}
-      </button>
-
       {isOpen && (
         <div className="history-panel-overlay" onClick={() => setIsOpen(false)}>
           <div className="history-panel" onClick={(e) => e.stopPropagation()}>
