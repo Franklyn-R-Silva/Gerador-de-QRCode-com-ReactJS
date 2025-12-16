@@ -78,6 +78,7 @@ src/
 ## 🏗️ Design Patterns Implementados
 
 ### 1. **Context API (Provider Pattern)**
+
 - **Localização**: `src/contexts/`
 - **Propósito**: Gerenciar estado global sem prop drilling
 - **Implementações**:
@@ -87,7 +88,7 @@ src/
 
 ```javascript
 // Uso
-import { useTheme } from './contexts/ThemeContext';
+import { useTheme } from "./contexts/ThemeContext";
 
 function Component() {
   const { theme, toggleTheme } = useTheme();
@@ -96,6 +97,7 @@ function Component() {
 ```
 
 ### 2. **Singleton Pattern**
+
 - **Localização**: `src/services/`
 - **Propósito**: Garantir instância única de serviços
 - **Implementações**:
@@ -118,21 +120,23 @@ export default new LocalStorageService();
 ```
 
 ### 3. **Factory Pattern**
+
 - **Localização**: `src/services/export/ExportFactory.js`
 - **Propósito**: Criar diferentes estratégias de exportação
 - **Uso**:
 
 ```javascript
-import exportFactory from './services/export/ExportFactory';
+import exportFactory from "./services/export/ExportFactory";
 
 // Exportar PNG
-await exportFactory.export('PNG', canvas, { transparent: true });
+await exportFactory.export("PNG", canvas, { transparent: true });
 
 // Exportar PDF
-await exportFactory.export('PDF', canvas, { pageSize: 'a4' });
+await exportFactory.export("PDF", canvas, { pageSize: "a4" });
 ```
 
 ### 4. **Strategy Pattern**
+
 - **Localização**: `src/services/export/strategies/`
 - **Propósito**: Diferentes algoritmos de exportação intercambiáveis
 - **Estratégias**:
@@ -151,6 +155,7 @@ export class PNGExportStrategy extends BaseExportStrategy {
 ```
 
 ### 5. **Custom Hooks Pattern**
+
 - **Localização**: `src/hooks/`
 - **Propósito**: Encapsular lógica reutilizável
 - **Hooks**:
@@ -202,23 +207,28 @@ const { history, addToHistory, clearHistory } = useHistory();
 ## 🎨 Princípios SOLID Aplicados
 
 ### **S - Single Responsibility Principle**
+
 - Cada serviço tem uma única responsabilidade
 - `HistoryService` → apenas histórico
 - `ExportFactory` → apenas exportação
 
 ### **O - Open/Closed Principle**
+
 - Sistema aberto para extensão (novas estratégias de export)
 - Fechado para modificação (interfaces estáveis)
 
 ### **L - Liskov Substitution Principle**
+
 - Todas as estratégias de export implementam `BaseExportStrategy`
 - Podem ser substituídas sem quebrar o código
 
 ### **I - Interface Segregation Principle**
+
 - Hooks específicos ao invés de um hook gigante
 - `useExport`, `useHistory`, `useClipboard` separados
 
 ### **D - Dependency Inversion Principle**
+
 - Componentes dependem de abstrações (contexts, hooks)
 - Não dependem diretamente de implementações (services)
 
@@ -227,15 +237,17 @@ const { history, addToHistory, clearHistory } = useHistory();
 ## 🧪 Vantagens da Nova Arquitetura
 
 ### **1. Testabilidade**
+
 ```javascript
 // Fácil de testar isoladamente
-test('HistoryService adds item', () => {
+test("HistoryService adds item", () => {
   const item = historyService.addToHistory(mockConfig);
   expect(item).toBeDefined();
 });
 ```
 
 ### **2. Reutilização**
+
 ```javascript
 // Mesmos hooks em múltiplos componentes
 const { copy } = useClipboard();
@@ -243,11 +255,13 @@ const { exportImage } = useExport();
 ```
 
 ### **3. Manutenibilidade**
+
 - Alterações isoladas em arquivos específicos
 - Fácil localizar e corrigir bugs
 - Código organizado e limpo
 
 ### **4. Escalabilidade**
+
 - Adicionar novas features sem impactar existentes
 - Novas estratégias de export: apenas criar nova classe
 - Novos hooks: criar e usar imediatamente
@@ -264,7 +278,7 @@ class JPEGExportStrategy extends BaseExportStrategy {
   constructor() {
     super("JPEG", "image/jpeg", "jpg");
   }
-  
+
   async export(canvas, options) {
     // Implementação
   }
@@ -283,7 +297,7 @@ export const MyContext = createContext();
 // 2. Criar provider
 export const MyProvider = ({ children }) => {
   const [state, setState] = useState(initialState);
-  
+
   return (
     <MyContext.Provider value={{ state, setState }}>
       {children}
@@ -303,11 +317,11 @@ export const useMyContext = () => {
 // src/hooks/useMyFeature.js
 export const useMyFeature = () => {
   const [state, setState] = useState();
-  
+
   const doSomething = useCallback(() => {
     // Lógica
   }, []);
-  
+
   return { state, doSomething };
 };
 ```
