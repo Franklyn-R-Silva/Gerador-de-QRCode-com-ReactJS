@@ -3,11 +3,13 @@
 ## ✅ Problemas Corrigidos
 
 ### 1. **Erro ao Selecionar UPC e Outros Formatos**
+
 - **Problema**: Formatos como UPC-A, UPC-E, EAN-13, etc. mostravam erro "Valor inválido"
 - **Causa**: Falta de validação prévia antes de renderizar o código
 - **Solução**: Sistema completo de validação para cada formato
 
 ### 2. **Reset Automático ao Erro**
+
 - **Problema**: Quando havia erro, usuário ficava perdido sem saber o que fazer
 - **Solução**: Botão "Usar Exemplo" que preenche automaticamente com valor válido
 
@@ -35,6 +37,7 @@ export const validateUPCA = (value) => {
 ```
 
 **Formatos Validados:**
+
 - ✅ UPC-A (12 dígitos)
 - ✅ UPC-E (6-8 dígitos)
 - ✅ EAN-13 (13 dígitos)
@@ -78,6 +81,7 @@ export const validateUPCA = (value) => {
 ```
 
 **Recursos:**
+
 - 📝 Mensagem de erro clara
 - 💡 Sugestão de valor válido
 - 🔄 Botão para resetar automaticamente
@@ -86,6 +90,7 @@ export const validateUPCA = (value) => {
 ### **3. Sistema de Eventos para Reset**
 
 **App.jsx atualizado:**
+
 ```javascript
 // Ouvir evento de reset do barcode
 useEffect(() => {
@@ -101,6 +106,7 @@ useEffect(() => {
 ```
 
 **BarcodePreview dispara evento:**
+
 ```javascript
 const handleReset = () => {
   const example = getBarcodeExample(config.barcodeFormat);
@@ -169,6 +175,7 @@ const handleReset = () => {
 ## 🧪 Exemplos de Uso
 
 ### **Caso 1: UPC-A com valor inválido**
+
 ```
 Entrada: "123"
 Validação: ❌ FALHA - Precisa de 12 dígitos
@@ -178,6 +185,7 @@ Ação: Botão "Usar Exemplo" disponível
 ```
 
 ### **Caso 2: CODE128C com valor ímpar**
+
 ```
 Entrada: "12345"
 Validação: ❌ FALHA - Precisa número par de dígitos
@@ -187,6 +195,7 @@ Ação: Botão "Usar Exemplo" disponível
 ```
 
 ### **Caso 3: Pharmacode fora do range**
+
 ```
 Entrada: "200000"
 Validação: ❌ FALHA - Valor muito alto
@@ -200,6 +209,7 @@ Ação: Botão "Usar Exemplo" disponível
 ## 🎯 Benefícios da Implementação
 
 ### **Para o Usuário:**
+
 ✅ Feedback imediato sobre erros
 ✅ Mensagens claras e compreensíveis
 ✅ Sugestões de valores válidos
@@ -207,6 +217,7 @@ Ação: Botão "Usar Exemplo" disponível
 ✅ Melhor experiência de uso
 
 ### **Para o Desenvolvedor:**
+
 ✅ Código organizado e modular
 ✅ Fácil adicionar novos formatos
 ✅ Validação centralizada
@@ -218,6 +229,7 @@ Ação: Botão "Usar Exemplo" disponível
 ## 📝 Como Adicionar Novo Formato
 
 1. **Adicionar validador em `barcodeValidators.js`:**
+
 ```javascript
 export const validateMEUFORMATO = (value) => {
   // Lógica de validação
@@ -233,6 +245,7 @@ export const validateMEUFORMATO = (value) => {
 ```
 
 2. **Registrar no mapa de validadores:**
+
 ```javascript
 export const BARCODE_VALIDATORS = {
   MEUFORMATO: validateMEUFORMATO,
@@ -241,6 +254,7 @@ export const BARCODE_VALIDATORS = {
 ```
 
 3. **Adicionar exemplo:**
+
 ```javascript
 const examples = {
   MEUFORMATO: "exemplo123",

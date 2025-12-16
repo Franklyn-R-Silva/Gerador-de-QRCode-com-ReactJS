@@ -69,7 +69,28 @@ const BarcodePreview = ({ config, showToast }) => {
         btoa(unescape(encodeURIComponent(svgData)));
     });
   };
-return (
+
+  /**
+   * Lógica de Copiar para a Área de Transferência
+   */
+  const handleCopyBarcode = async () => {
+    const svg = getSVG();
+    if (!svg) return;
+
+    try {
+      const canvas = await svgToCanvas(svg);
+      const dataUrl = canvas.toDataURL("image/png");
+      const blob = await (await fetch(dataUrl)).blob();
+      const clipboardItem = new ClipboardItem({ "image/png": blob });
+      await navigator.clipboard.write([clipboardItem]);
+      if (showToast) showToast("Código de barras copiado para o clipboard!");
+    } catch (err) {
+      console.error(err);
+      if (showToast) showToast("Erro ao copiar. Tente baixar.");
+    }
+  };
+
+  return (
     <motion.section
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
