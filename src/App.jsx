@@ -116,7 +116,12 @@ function App() {
       )}
 
       {/* Cabeçalho */}
-      <Header theme={theme} toggleTheme={toggleTheme} />
+      <Header theme={theme} toggleTheme={toggleTheme}>
+        <HistoryPanel
+          onLoadConfig={loadConfigFromHistory}
+          showToast={showToast}
+        />
+      </Header>
 
       <main className="main-content">
         {/* Esquerda: Visualização do Código */}
@@ -135,12 +140,6 @@ function App() {
           handleCopyText={handleCopyText}
         />
       </main>
-
-      {/* Botão Flutuante de Histórico */}
-      <HistoryPanel
-        onLoadConfig={loadConfigFromHistory}
-        showToast={showToast}
-      />
 
       <Footer />
     </div>

@@ -110,11 +110,11 @@ const HistoryPanel = ({ onLoadConfig, showToast }) => {
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="btn-history-floating"
+        className="btn-history"
         aria-label="Ver histórico"
         title={`Histórico (${history.length} itens)`}
       >
-        <AiOutlineHistory size={24} />
+        <AiOutlineHistory size={20} />
         <span>Histórico</span>
         {history.length > 0 && (
           <span className="history-badge">{history.length}</span>
