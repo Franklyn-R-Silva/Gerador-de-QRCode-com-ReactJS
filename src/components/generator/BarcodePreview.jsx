@@ -3,7 +3,10 @@ import Barcode from "react-barcode";
 import { AiOutlineCopy, AiOutlineReload } from "react-icons/ai";
 import { motion } from "framer-motion";
 import ExportOptions from "./ExportOptions";
-import { validateBarcodeValue, getBarcodeExample } from "../../utils/barcodeValidators";
+import {
+  validateBarcodeValue,
+  getBarcodeExample,
+} from "../../utils/barcodeValidators";
 import "./GeneratorArea.css";
 
 const BarcodePreview = ({ config, showToast }) => {
@@ -131,31 +134,6 @@ const BarcodePreview = ({ config, showToast }) => {
                 </button>
               </div>
             )}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="preview-section"
-      aria-label="Pré-visualização do código de barras"
-    >
-      <motion.div
-        initial={{ scale: 0.9 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 0.4, delay: 0.1 }}
-        className="preview-card barcode-card"
-        ref={barcodeRef}
-        role="img"
-        aria-label="Código de barras gerado"
-        whileHover={{ scale: 1.02 }}
-      >
-        {error ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="error-message"
-            role="alert"
-          >
-            <p>❌ Erro ao gerar código de barras</p>
-            <small>{error}</small>
           </motion.div>
         ) : (
           <Barcode
