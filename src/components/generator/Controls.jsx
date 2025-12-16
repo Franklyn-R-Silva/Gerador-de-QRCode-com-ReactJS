@@ -409,7 +409,13 @@ const Controls = ({
                       updateConfig("logoSize", Number(e.target.value))
                     }
                   />
-                  <small style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', marginTop: '0.25rem' }}>
+                  <small
+                    style={{
+                      color: "var(--text-secondary)",
+                      fontSize: "0.8rem",
+                      marginTop: "0.25rem",
+                    }}
+                  >
                     Ajusta o tamanho da logo em relação ao QR Code
                   </small>
                 </div>
@@ -417,7 +423,9 @@ const Controls = ({
 
               {/* Opacidade */}
               <div className="control-item full-width">
-                <label>Opacidade: {(config.logoOpacity * 100).toFixed(0)}%</label>
+                <label>
+                  Opacidade: {(config.logoOpacity * 100).toFixed(0)}%
+                </label>
                 <input
                   type="range"
                   min="0"
@@ -443,16 +451,25 @@ const Controls = ({
               </label>
 
               {/* Informação sobre posicionamento */}
-              <div style={{ 
-                marginTop: '0.75rem', 
-                padding: '0.75rem', 
-                background: 'var(--bg-secondary)', 
-                borderRadius: '8px',
-                border: '1px solid var(--border)'
-              }}>
-                <small style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.5' }}>
-                  💡 <strong>Dica:</strong> A logo é sempre centralizada no QR Code. 
-                  Use o modo "Original" para manter proporções da imagem ou "Personalizado" para ajustar livremente.
+              <div
+                style={{
+                  marginTop: "0.75rem",
+                  padding: "0.75rem",
+                  background: "var(--bg-secondary)",
+                  borderRadius: "8px",
+                  border: "1px solid var(--border)",
+                }}
+              >
+                <small
+                  style={{
+                    color: "var(--text-secondary)",
+                    fontSize: "0.85rem",
+                    lineHeight: "1.5",
+                  }}
+                >
+                  💡 <strong>Dica:</strong> A logo é sempre centralizada no QR
+                  Code. Use o modo "Original" para manter proporções da imagem
+                  ou "Personalizado" para ajustar livremente.
                 </small>
               </div>
             </div>

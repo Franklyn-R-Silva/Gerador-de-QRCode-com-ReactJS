@@ -14,20 +14,20 @@ const QRCodePreview = ({ config, showToast }) => {
   // Calcular tamanho da logo baseado no modo selecionado
   const calculateLogoSize = () => {
     if (!config.logoImage) return { width: 0, height: 0 };
-    
+
     switch (config.logoSizeMode) {
       case "original":
         // Usar tamanho original da imagem (limitado ao tamanho do QR)
         return {
           width: Math.min(config.size * 0.4, config.size),
-          height: Math.min(config.size * 0.4, config.size)
+          height: Math.min(config.size * 0.4, config.size),
         };
       case "custom":
         // Usar percentual customizado
         const percentage = (config.logoSize || 25) / 100;
         return {
           width: config.size * percentage,
-          height: config.size * percentage
+          height: config.size * percentage,
         };
       case "auto":
       default:
@@ -35,7 +35,7 @@ const QRCodePreview = ({ config, showToast }) => {
         const autoPercentage = (config.logoSize || 25) / 100;
         return {
           width: config.size * autoPercentage,
-          height: config.size * autoPercentage
+          height: config.size * autoPercentage,
         };
     }
   };
